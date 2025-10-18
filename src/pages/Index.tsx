@@ -339,6 +339,12 @@ const Index = () => {
               </CardContent>
             </Card>
           </div>
+          <div className="text-center mt-10">
+            <Button size="lg" className="game-gradient text-lg px-8 hover-scale" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>
+              <Icon name="Send" size={20} className="mr-2" />
+              Присоединиться к каналу
+            </Button>
+          </div>
         </div>
       </section>
 
