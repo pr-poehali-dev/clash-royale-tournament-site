@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
@@ -7,6 +7,7 @@ import Icon from '@/components/ui/icon';
 const Index = () => {
   const [scrolled, setScrolled] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +36,24 @@ const Index = () => {
     calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleSections((prev) => new Set(prev).add(entry.target.id));
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -139,7 +158,7 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 px-4 section-gradient">
         <div className="container mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
+          <div className={`text-center mb-12 transition-all duration-1000 ${visibleSections.has('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">О турнире</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Самое масштабное соревнование по Clash Royale в Ростове-на-Дону
@@ -149,7 +168,7 @@ const Index = () => {
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="hover-scale animate-fade-in border-2 border-primary/50" style={{boxShadow: '0 0 20px hsla(262, 90%, 65%, 0.4)'}}>
+            <Card className={`hover-scale border-2 border-primary/50 transition-all duration-700 delay-100 ${visibleSections.has('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`} style={{boxShadow: '0 0 20px hsla(262, 90%, 65%, 0.4)'}}>
               <CardHeader>
                 <div className="w-12 h-12 game-gradient rounded-lg flex items-center justify-center mb-4">
                   <Icon name="Users" size={28} className="text-white" />
@@ -162,7 +181,7 @@ const Index = () => {
                 </CardDescription>
               </CardContent>
             </Card>
-            <Card className="hover-scale animate-fade-in border-2 border-secondary/50" style={{boxShadow: '0 0 20px hsla(25, 100%, 60%, 0.4)'}}>
+            <Card className={`hover-scale border-2 border-secondary/50 transition-all duration-700 delay-300 ${visibleSections.has('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`} style={{boxShadow: '0 0 20px hsla(25, 100%, 60%, 0.4)'}}>
               <CardHeader>
                 <div className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center mb-4">
                   <Icon name="Gamepad2" size={28} className="text-white" />
@@ -175,7 +194,7 @@ const Index = () => {
                 </CardDescription>
               </CardContent>
             </Card>
-            <Card className="hover-scale animate-fade-in border-2 border-accent/50" style={{boxShadow: '0 0 20px hsla(199, 95%, 55%, 0.4)'}}>
+            <Card className={`hover-scale border-2 border-accent/50 transition-all duration-700 delay-500 ${visibleSections.has('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`} style={{boxShadow: '0 0 20px hsla(199, 95%, 55%, 0.4)'}}>
               <CardHeader>
                 <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center mb-4">
                   <Icon name="MapPin" size={28} className="text-white" />
@@ -195,7 +214,7 @@ const Index = () => {
       {/* Prizes Section */}
       <section id="prizes" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
+          <div className={`text-center mb-12 transition-all duration-1000 ${visibleSections.has('prizes') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="mb-8 max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl">
               <img src="https://cdn.poehali.dev/projects/94cc7da1-e015-4c01-9bcd-c9f0550c3e4a/files/7b446dd8-4106-4094-80e7-72c35e0dc0f4.jpg" alt="Tournament Trophy" className="w-full h-auto" />
             </div>
@@ -205,7 +224,7 @@ const Index = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="relative overflow-hidden hover-scale animate-fade-in border-2 border-secondary">
+            <Card className={`relative overflow-hidden hover-scale border-2 border-secondary transition-all duration-700 delay-100 ${visibleSections.has('prizes') ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-95'}`}>
               <div className="absolute top-0 right-0 bg-secondary text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
                 2 место
               </div>
@@ -221,7 +240,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="relative overflow-hidden hover-scale animate-fade-in border-2 border-primary scale-105">
+            <Card className={`relative overflow-hidden hover-scale border-2 border-primary scale-105 transition-all duration-700 delay-300 ${visibleSections.has('prizes') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
               <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
                 1 место
               </div>
@@ -237,7 +256,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="relative overflow-hidden hover-scale animate-fade-in border-2 border-accent">
+            <Card className={`relative overflow-hidden hover-scale border-2 border-accent transition-all duration-700 delay-500 ${visibleSections.has('prizes') ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-20 scale-95'}`}>
               <div className="absolute top-0 right-0 bg-accent text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
                 3 место
               </div>
@@ -269,14 +288,14 @@ const Index = () => {
       {/* Schedule Section */}
       <section id="schedule" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12 animate-fade-in">
+          <div className={`text-center mb-12 transition-all duration-1000 ${visibleSections.has('schedule') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Расписание турнира</h2>
             <p className="text-xl text-muted-foreground">
               15 декабря 2025 — программа дня
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="hover-scale animate-fade-in border-primary/20">
+            <Card className={`hover-scale border-primary/20 transition-all duration-500 delay-100 ${visibleSections.has('schedule') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-16 h-16 game-gradient rounded-lg flex items-center justify-center">
@@ -290,7 +309,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-scale animate-fade-in border-secondary/20">
+            <Card className={`hover-scale border-secondary/20 transition-all duration-500 delay-200 ${visibleSections.has('schedule') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
@@ -304,7 +323,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-scale animate-fade-in border-accent/20">
+            <Card className={`hover-scale border-accent/20 transition-all duration-500 delay-300 ${visibleSections.has('schedule') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
@@ -318,7 +337,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-scale animate-fade-in border-primary/20">
+            <Card className={`hover-scale border-primary/20 transition-all duration-500 delay-400 ${visibleSections.has('schedule') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-16 h-16 game-gradient rounded-lg flex items-center justify-center">
@@ -332,7 +351,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-scale animate-fade-in border-secondary/20">
+            <Card className={`hover-scale border-secondary/20 transition-all duration-500 delay-500 ${visibleSections.has('schedule') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
@@ -346,7 +365,7 @@ const Index = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover-scale animate-fade-in border-accent/20">
+            <Card className={`hover-scale border-accent/20 transition-all duration-500 delay-700 ${visibleSections.has('schedule') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
