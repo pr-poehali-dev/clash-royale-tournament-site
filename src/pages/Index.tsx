@@ -1,12 +1,345 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
+        <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-10 h-10 game-gradient rounded-lg flex items-center justify-center">
+              <Icon name="Trophy" size={24} className="text-white" />
+            </div>
+            <span className="text-xl font-bold">CR Tournament</span>
+          </div>
+          <div className="hidden md:flex gap-6">
+            <button onClick={() => scrollToSection('about')} className="hover:text-primary transition-colors">О турнире</button>
+            <button onClick={() => scrollToSection('prizes')} className="hover:text-primary transition-colors">Призы</button>
+            <button onClick={() => scrollToSection('rules')} className="hover:text-primary transition-colors">Правила</button>
+            <button onClick={() => scrollToSection('contacts')} className="hover:text-primary transition-colors">Контакты</button>
+          </div>
+          <Button className="game-gradient">Регистрация</Button>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 game-gradient opacity-10"></div>
+        <div className="container mx-auto text-center relative z-10 animate-fade-in">
+          <div className="inline-flex items-center gap-2 bg-primary/20 px-4 py-2 rounded-full mb-6">
+            <Icon name="Zap" size={20} className="text-primary" />
+            <span className="text-sm font-semibold text-primary">Грандиозное событие</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Clash Royale Tournament
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-4">Ростов-на-Дону</p>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="flex items-center gap-2">
+              <Icon name="Calendar" size={24} className="text-secondary" />
+              <span className="text-2xl font-bold">15 декабря 2025</span>
+            </div>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="game-gradient text-lg px-8 hover-scale">
+              <Icon name="UserPlus" size={20} className="mr-2" />
+              Зарегистрироваться
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg px-8 hover-scale" onClick={() => scrollToSection('about')}>
+              <Icon name="Info" size={20} className="mr-2" />
+              Подробнее
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 section-gradient">
+        <div className="container mx-auto">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">О турнире</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Самое масштабное соревнование по Clash Royale в Ростове-на-Дону
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Card className="hover-scale animate-fade-in border-primary/20">
+              <CardHeader>
+                <div className="w-12 h-12 game-gradient rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="Users" size={28} className="text-white" />
+                </div>
+                <CardTitle>Для всех уровней</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Турнир открыт для игроков любого уровня мастерства. От новичков до профессионалов!
+                </CardDescription>
+              </CardContent>
+            </Card>
+            <Card className="hover-scale animate-fade-in border-secondary/20">
+              <CardHeader>
+                <div className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="Gamepad2" size={28} className="text-white" />
+                </div>
+                <CardTitle>Формат 1 на 1</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Классические дуэли в формате один на один. Покажи своё мастерство в честной борьбе!
+                </CardDescription>
+              </CardContent>
+            </Card>
+            <Card className="hover-scale animate-fade-in border-accent/20">
+              <CardHeader>
+                <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="MapPin" size={28} className="text-white" />
+                </div>
+                <CardTitle>Офлайн формат</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>
+                  Играем вместе в одном месте! Почувствуй атмосферу настоящего киберспортивного события.
+                </CardDescription>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Prizes Section */}
+      <section id="prizes" className="py-20 px-4 bg-card/30">
+        <div className="container mx-auto">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Призы и награды</h2>
+            <p className="text-xl text-muted-foreground">
+              Ценные призы для победителей и участников
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Card className="relative overflow-hidden hover-scale animate-fade-in border-2 border-secondary">
+              <div className="absolute top-0 right-0 bg-secondary text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
+                2 место
+              </div>
+              <CardHeader className="text-center pt-8">
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-slate-300 to-slate-500 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="Medal" size={40} className="text-white" />
+                </div>
+                <CardTitle className="text-2xl">Серебро</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-3xl font-bold text-secondary mb-2">15 000 ₽</p>
+                <p className="text-muted-foreground">+ сертификат участника</p>
+              </CardContent>
+            </Card>
+
+            <Card className="relative overflow-hidden hover-scale animate-fade-in border-2 border-primary scale-105">
+              <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
+                1 место
+              </div>
+              <CardHeader className="text-center pt-8">
+                <div className="w-24 h-24 mx-auto game-gradient rounded-full flex items-center justify-center mb-4 shadow-lg shadow-primary/50">
+                  <Icon name="Crown" size={48} className="text-white" />
+                </div>
+                <CardTitle className="text-3xl">Золото</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-4xl font-bold text-primary mb-2">30 000 ₽</p>
+                <p className="text-muted-foreground">+ кубок чемпиона</p>
+              </CardContent>
+            </Card>
+
+            <Card className="relative overflow-hidden hover-scale animate-fade-in border-2 border-accent">
+              <div className="absolute top-0 right-0 bg-accent text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
+                3 место
+              </div>
+              <CardHeader className="text-center pt-8">
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-amber-600 to-amber-800 rounded-full flex items-center justify-center mb-4">
+                  <Icon name="Award" size={40} className="text-white" />
+                </div>
+                <CardTitle className="text-2xl">Бронза</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
+                <p className="text-3xl font-bold text-accent mb-2">7 000 ₽</p>
+                <p className="text-muted-foreground">+ сертификат участника</p>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="text-center mt-8">
+            <Card className="inline-block bg-muted/50">
+              <CardContent className="py-4 px-6">
+                <p className="text-lg">
+                  <Icon name="Gift" size={20} className="inline mr-2 text-primary" />
+                  Всем участникам — памятные сувениры и мерч!
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Rules Section */}
+      <section id="rules" className="py-20 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Правила турнира</h2>
+            <p className="text-xl text-muted-foreground">
+              Прочти внимательно перед регистрацией
+            </p>
+          </div>
+          <Card className="animate-fade-in">
+            <CardContent className="p-8">
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 game-gradient rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold">1</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Регистрация участников</h3>
+                    <p className="text-muted-foreground">Регистрация открыта до 10 декабря 2025. Максимальное количество участников — 64 игрока. Регистрация осуществляется онлайн через форму на сайте.</p>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 game-gradient rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold">2</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Формат соревнования</h3>
+                    <p className="text-muted-foreground">Турнир проходит в формате Single Elimination (олимпийская система). Каждый матч — Bo3 (лучший из трёх). Финал — Bo5 (лучший из пяти).</p>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 game-gradient rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold">3</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Требования к участникам</h3>
+                    <p className="text-muted-foreground">Минимальный уровень короля — 9. Все карты должны соответствовать турнирным стандартам. Запрещено использование читов и модификаций игры.</p>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 game-gradient rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold">4</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Время проведения</h3>
+                    <p className="text-muted-foreground">Турнир начинается в 10:00. Регистрация на месте — с 9:00 до 9:45. Опоздавшие участники дисквалифицируются.</p>
+                  </div>
+                </div>
+                <Separator />
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 game-gradient rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold">5</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Правила поведения</h3>
+                    <p className="text-muted-foreground">Уважительное отношение к соперникам и организаторам обязательно. За токсичное поведение — предупреждение или дисквалификация. Решения судей окончательны.</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Contacts Section */}
+      <section id="contacts" className="py-20 px-4 section-gradient">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Контакты организаторов</h2>
+            <p className="text-xl text-muted-foreground">
+              Остались вопросы? Свяжитесь с нами!
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="hover-scale animate-fade-in">
+              <CardHeader>
+                <div className="w-12 h-12 game-gradient rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="Mail" size={28} className="text-white" />
+                </div>
+                <CardTitle>Email</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <a href="mailto:tournament@clashroyale-rostov.ru" className="text-primary hover:underline text-lg">
+                  tournament@clashroyale-rostov.ru
+                </a>
+                <p className="text-muted-foreground mt-2">Ответим в течение 24 часов</p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in">
+              <CardHeader>
+                <div className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="Phone" size={28} className="text-white" />
+                </div>
+                <CardTitle>Телефон</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <a href="tel:+79001234567" className="text-primary hover:underline text-lg">
+                  +7 (900) 123-45-67
+                </a>
+                <p className="text-muted-foreground mt-2">Звоните с 10:00 до 20:00</p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in">
+              <CardHeader>
+                <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="MessageCircle" size={28} className="text-white" />
+                </div>
+                <CardTitle>Telegram</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <a href="https://t.me/crtournament_rostov" className="text-primary hover:underline text-lg">
+                  @crtournament_rostov
+                </a>
+                <p className="text-muted-foreground mt-2">Быстрая связь в мессенджере</p>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in">
+              <CardHeader>
+                <div className="w-12 h-12 game-gradient rounded-lg flex items-center justify-center mb-4">
+                  <Icon name="MapPin" size={28} className="text-white" />
+                </div>
+                <CardTitle>Место проведения</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-lg mb-1">ТЦ "Горизонт"</p>
+                <p className="text-muted-foreground">г. Ростов-на-Дону, пр. Космонавтов, 32</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 border-t border-border">
+        <div className="container mx-auto text-center text-muted-foreground">
+          <p>© 2025 Clash Royale Tournament Ростов-на-Дону. Все права защищены.</p>
+          <p className="mt-2 text-sm">Clash Royale является торговой маркой Supercell</p>
+        </div>
+      </footer>
     </div>
   );
 };
