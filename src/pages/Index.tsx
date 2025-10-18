@@ -36,7 +36,7 @@ const Index = () => {
             <button onClick={() => scrollToSection('rules')} className="hover:text-primary transition-colors">Правила</button>
             <button onClick={() => scrollToSection('contacts')} className="hover:text-primary transition-colors">Контакты</button>
           </div>
-          <Button className="game-gradient">Регистрация</Button>
+          <Button className="game-gradient" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>Регистрация</Button>
         </nav>
       </header>
 
@@ -62,7 +62,7 @@ const Index = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="game-gradient text-lg px-8 hover-scale">
+            <Button size="lg" className="game-gradient text-lg px-8 hover-scale" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>
               <Icon name="UserPlus" size={20} className="mr-2" />
               Зарегистрироваться
             </Button>
