@@ -59,7 +59,7 @@ const Index = () => {
             <button onClick={() => scrollToSection('rules')} className="hover:text-primary transition-colors">Правила</button>
             <button onClick={() => scrollToSection('contacts')} className="hover:text-primary transition-colors">Контакты</button>
           </div>
-          <Button className="game-gradient" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>Регистрация</Button>
+          <Button className="game-gradient hover:brightness-125 transition-all duration-300" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>Регистрация</Button>
         </nav>
       </header>
 
@@ -68,6 +68,23 @@ const Index = () => {
         <div className="absolute inset-0 opacity-30">
           <img src="https://cdn.poehali.dev/projects/94cc7da1-e015-4c01-9bcd-c9f0550c3e4a/files/f3ee0f20-3af2-44f3-a409-80e87d3175b6.jpg" alt="Clash Royale Battle" className="w-full h-full object-cover" />
           <div className="absolute inset-0 game-gradient opacity-50"></div>
+        </div>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(30)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-primary/30 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${Math.random() * 4 + 2}px`,
+                height: `${Math.random() * 4 + 2}px`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${Math.random() * 3 + 2}s`,
+                boxShadow: `0 0 ${Math.random() * 20 + 10}px hsl(262, 90%, 65%)`
+              }}
+            />
+          ))}
         </div>
         <div className="container mx-auto text-center relative z-10 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/20 px-4 py-2 rounded-full mb-6">
@@ -107,11 +124,11 @@ const Index = () => {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="game-gradient text-lg px-8 hover-scale" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>
+            <Button size="lg" className="game-gradient text-lg px-8 hover-scale hover:brightness-125 transition-all duration-300" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>
               <Icon name="UserPlus" size={20} className="mr-2" />
               Зарегистрироваться
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 hover-scale" onClick={() => scrollToSection('about')}>
+            <Button size="lg" variant="outline" className="text-lg px-8 hover-scale border-2 border-primary/50 hover:bg-primary/20 hover:border-primary transition-all duration-300" onClick={() => scrollToSection('about')}>
               <Icon name="Info" size={20} className="mr-2" />
               Подробнее
             </Button>
@@ -482,7 +499,7 @@ const Index = () => {
             </Card>
           </div>
           <div className="text-center mt-10">
-            <Button size="lg" className="game-gradient text-lg px-8 hover-scale" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>
+            <Button size="lg" className="game-gradient text-lg px-8 hover-scale hover:brightness-125 transition-all duration-300" onClick={() => window.open('https://t.me/crtournament_rostov', '_blank')}>
               <Icon name="Send" size={20} className="mr-2" />
               Присоединиться к каналу
             </Button>
