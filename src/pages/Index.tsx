@@ -6,6 +6,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +14,27 @@ const Index = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const tournamentDate = new Date('2025-12-15T10:00:00').getTime();
+      const now = new Date().getTime();
+      const difference = tournamentDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -55,10 +77,32 @@ const Index = () => {
             Clash Royale Tournament
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-4">Ростов-на-Дону</p>
-          <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="flex items-center justify-center gap-4 mb-6">
             <div className="flex items-center gap-2">
               <Icon name="Calendar" size={24} className="text-secondary" />
               <span className="text-2xl font-bold">15 декабря 2025</span>
+            </div>
+          </div>
+          
+          <div className="mb-8 max-w-3xl mx-auto">
+            <p className="text-sm text-muted-foreground mb-3">До начала турнира осталось:</p>
+            <div className="grid grid-cols-4 gap-3 md:gap-6">
+              <div className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-lg p-4">
+                <div className="text-3xl md:text-5xl font-bold text-primary">{timeLeft.days}</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-1">дней</div>
+              </div>
+              <div className="bg-card/50 backdrop-blur-sm border border-secondary/20 rounded-lg p-4">
+                <div className="text-3xl md:text-5xl font-bold text-secondary">{timeLeft.hours}</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-1">часов</div>
+              </div>
+              <div className="bg-card/50 backdrop-blur-sm border border-accent/20 rounded-lg p-4">
+                <div className="text-3xl md:text-5xl font-bold text-accent">{timeLeft.minutes}</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-1">минут</div>
+              </div>
+              <div className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-lg p-4">
+                <div className="text-3xl md:text-5xl font-bold text-primary">{timeLeft.seconds}</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-1">секунд</div>
+              </div>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
