@@ -154,8 +154,8 @@ const Index = () => {
                 <CardTitle className="text-2xl">Серебро</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-3xl font-bold text-secondary mb-2">15 000 ₽</p>
-                <p className="text-muted-foreground">+ сертификат участника</p>
+                <p className="text-3xl font-bold text-secondary mb-2">Игровая клавиатура</p>
+                <p className="text-muted-foreground">+ эксклюзивный мерч</p>
               </CardContent>
             </Card>
 
@@ -170,7 +170,7 @@ const Index = () => {
                 <CardTitle className="text-3xl">Золото</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-4xl font-bold text-primary mb-2">30 000 ₽</p>
+                <p className="text-4xl font-bold text-primary mb-2">Gaming смартфон</p>
                 <p className="text-muted-foreground">+ кубок чемпиона</p>
               </CardContent>
             </Card>
@@ -186,8 +186,8 @@ const Index = () => {
                 <CardTitle className="text-2xl">Бронза</CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <p className="text-3xl font-bold text-accent mb-2">7 000 ₽</p>
-                <p className="text-muted-foreground">+ сертификат участника</p>
+                <p className="text-3xl font-bold text-accent mb-2">Беспроводные наушники</p>
+                <p className="text-muted-foreground">+ игровой мерч</p>
               </CardContent>
             </Card>
           </div>
