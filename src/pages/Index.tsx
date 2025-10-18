@@ -42,7 +42,10 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 game-gradient opacity-10"></div>
+        <div className="absolute inset-0 opacity-30">
+          <img src="https://cdn.poehali.dev/projects/94cc7da1-e015-4c01-9bcd-c9f0550c3e4a/files/f3ee0f20-3af2-44f3-a409-80e87d3175b6.jpg" alt="Clash Royale Battle" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 game-gradient opacity-50"></div>
+        </div>
         <div className="container mx-auto text-center relative z-10 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary/20 px-4 py-2 rounded-full mb-6">
             <Icon name="Zap" size={20} className="text-primary" />
@@ -79,6 +82,9 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Самое масштабное соревнование по Clash Royale в Ростове-на-Дону
             </p>
+            <div className="mt-8 max-w-3xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+              <img src="https://cdn.poehali.dev/projects/94cc7da1-e015-4c01-9bcd-c9f0550c3e4a/files/900476e6-8746-4a48-94de-2e4a721129d3.jpg" alt="Clash Royale Characters" className="w-full h-auto" />
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <Card className="hover-scale animate-fade-in border-primary/20">
@@ -128,6 +134,9 @@ const Index = () => {
       <section id="prizes" className="py-20 px-4 bg-card/30">
         <div className="container mx-auto">
           <div className="text-center mb-12 animate-fade-in">
+            <div className="mb-8 max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+              <img src="https://cdn.poehali.dev/projects/94cc7da1-e015-4c01-9bcd-c9f0550c3e4a/files/7b446dd8-4106-4094-80e7-72c35e0dc0f4.jpg" alt="Tournament Trophy" className="w-full h-auto" />
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Призы и награды</h2>
             <p className="text-xl text-muted-foreground">
               Ценные призы для победителей и участников
