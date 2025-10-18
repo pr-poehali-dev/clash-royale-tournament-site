@@ -74,7 +74,7 @@ const Index = () => {
             <Icon name="Zap" size={20} className="text-primary" />
             <span className="text-sm font-semibold text-primary">Грандиозное событие</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent glow-text">
             Clash Royale Tournament
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-4">Ростов-на-Дону</p>
@@ -88,20 +88,20 @@ const Index = () => {
           <div className="mb-8 max-w-3xl mx-auto">
             <p className="text-sm text-muted-foreground mb-3">До начала турнира осталось:</p>
             <div className="grid grid-cols-4 gap-3 md:gap-6">
-              <div className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-lg p-4">
-                <div className="text-3xl md:text-5xl font-bold text-primary">{timeLeft.days}</div>
+              <div className="bg-card/80 backdrop-blur-sm neon-border rounded-lg p-4 animate-pulse">
+                <div className="text-3xl md:text-5xl font-bold text-primary glow-text">{timeLeft.days}</div>
                 <div className="text-xs md:text-sm text-muted-foreground mt-1">дней</div>
               </div>
-              <div className="bg-card/50 backdrop-blur-sm border border-secondary/20 rounded-lg p-4">
-                <div className="text-3xl md:text-5xl font-bold text-secondary">{timeLeft.hours}</div>
+              <div className="bg-card/80 backdrop-blur-sm border-2 border-secondary rounded-lg p-4" style={{boxShadow: '0 0 20px hsla(25, 100%, 60%, 0.6)'}}>
+                <div className="text-3xl md:text-5xl font-bold text-secondary" style={{textShadow: '0 0 20px hsla(25, 100%, 60%, 0.8)'}}>{timeLeft.hours}</div>
                 <div className="text-xs md:text-sm text-muted-foreground mt-1">часов</div>
               </div>
-              <div className="bg-card/50 backdrop-blur-sm border border-accent/20 rounded-lg p-4">
-                <div className="text-3xl md:text-5xl font-bold text-accent">{timeLeft.minutes}</div>
+              <div className="bg-card/80 backdrop-blur-sm border-2 border-accent rounded-lg p-4" style={{boxShadow: '0 0 20px hsla(199, 95%, 55%, 0.6)'}}>
+                <div className="text-3xl md:text-5xl font-bold text-accent" style={{textShadow: '0 0 20px hsla(199, 95%, 55%, 0.8)'}}>{timeLeft.minutes}</div>
                 <div className="text-xs md:text-sm text-muted-foreground mt-1">минут</div>
               </div>
-              <div className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-lg p-4">
-                <div className="text-3xl md:text-5xl font-bold text-primary">{timeLeft.seconds}</div>
+              <div className="bg-card/80 backdrop-blur-sm neon-border rounded-lg p-4 animate-pulse">
+                <div className="text-3xl md:text-5xl font-bold text-primary glow-text">{timeLeft.seconds}</div>
                 <div className="text-xs md:text-sm text-muted-foreground mt-1">секунд</div>
               </div>
             </div>
@@ -132,7 +132,7 @@ const Index = () => {
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="hover-scale animate-fade-in border-primary/20">
+            <Card className="hover-scale animate-fade-in border-2 border-primary/50" style={{boxShadow: '0 0 20px hsla(262, 90%, 65%, 0.4)'}}>
               <CardHeader>
                 <div className="w-12 h-12 game-gradient rounded-lg flex items-center justify-center mb-4">
                   <Icon name="Users" size={28} className="text-white" />
@@ -145,7 +145,7 @@ const Index = () => {
                 </CardDescription>
               </CardContent>
             </Card>
-            <Card className="hover-scale animate-fade-in border-secondary/20">
+            <Card className="hover-scale animate-fade-in border-2 border-secondary/50" style={{boxShadow: '0 0 20px hsla(25, 100%, 60%, 0.4)'}}>
               <CardHeader>
                 <div className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center mb-4">
                   <Icon name="Gamepad2" size={28} className="text-white" />
@@ -158,7 +158,7 @@ const Index = () => {
                 </CardDescription>
               </CardContent>
             </Card>
-            <Card className="hover-scale animate-fade-in border-accent/20">
+            <Card className="hover-scale animate-fade-in border-2 border-accent/50" style={{boxShadow: '0 0 20px hsla(199, 95%, 55%, 0.4)'}}>
               <CardHeader>
                 <div className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center mb-4">
                   <Icon name="MapPin" size={28} className="text-white" />
