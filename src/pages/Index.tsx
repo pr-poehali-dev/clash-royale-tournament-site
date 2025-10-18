@@ -55,6 +55,7 @@ const Index = () => {
           <div className="hidden md:flex gap-6">
             <button onClick={() => scrollToSection('about')} className="hover:text-primary transition-colors">О турнире</button>
             <button onClick={() => scrollToSection('prizes')} className="hover:text-primary transition-colors">Призы</button>
+            <button onClick={() => scrollToSection('schedule')} className="hover:text-primary transition-colors">Расписание</button>
             <button onClick={() => scrollToSection('rules')} className="hover:text-primary transition-colors">Правила</button>
             <button onClick={() => scrollToSection('contacts')} className="hover:text-primary transition-colors">Контакты</button>
           </div>
@@ -242,6 +243,103 @@ const Index = () => {
                   <Icon name="Gift" size={20} className="inline mr-2 text-primary" />
                   Всем участникам — памятные сувениры и мерч!
                 </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Schedule Section */}
+      <section id="schedule" className="py-20 px-4 bg-card/30">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Расписание турнира</h2>
+            <p className="text-xl text-muted-foreground">
+              15 декабря 2025 — программа дня
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Card className="hover-scale animate-fade-in border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-16 h-16 game-gradient rounded-lg flex items-center justify-center">
+                    <Icon name="Clock" size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">9:00 - 9:45</h3>
+                    <p className="text-muted-foreground">Регистрация участников на месте</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in border-secondary/20">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
+                    <Icon name="Users" size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">10:00 - 10:30</h3>
+                    <p className="text-muted-foreground">Открытие турнира и жеребьёвка</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in border-accent/20">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
+                    <Icon name="Swords" size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">10:30 - 14:00</h3>
+                    <p className="text-muted-foreground">Групповой этап (1/16, 1/8, 1/4)</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in border-primary/20">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-16 h-16 game-gradient rounded-lg flex items-center justify-center">
+                    <Icon name="Coffee" size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">14:00 - 14:30</h3>
+                    <p className="text-muted-foreground">Перерыв на обед</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in border-secondary/20">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center">
+                    <Icon name="Zap" size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">14:30 - 16:00</h3>
+                    <p className="text-muted-foreground">Полуфиналы (Bo3)</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="hover-scale animate-fade-in border-accent/20">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
+                    <Icon name="Crown" size={28} className="text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl mb-1">16:00 - 17:30</h3>
+                    <p className="text-muted-foreground">Финал и награждение (Bo5)</p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
